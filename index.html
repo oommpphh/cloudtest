@@ -12,25 +12,23 @@
         if(inputAmount > 1){
 		amount = inputAmount;
 	}
-        widget.charge({ // options
-                publicId: 'pk_d1d4818604443453453453453',
+        widget.charge({ 
+                publicId: '',
                 description: 'Оплата в фонд',
-                amount: amount, //сумма
+                amount: amount, 
                 currency: 'RU',
-                invoiceId: '1234567', //номер заказа
-                accountId: '', //плательщик
+                invoiceId: '1234567', 
+                accountId: '', 
             },
-            function (options) { // success
-                //действие при успешном платеже
+            function (options) { 
 		alert('Оплата прошла успешно');
             },
-            function (reason, options) { // fail
-                //действие при неуспешном платеже
+            function (reason, options) { 
 		alert('Произошла ошибка в ходе оплаты!');
             });
     };
 jQuery(document).ready(function(){
-    jQuery("#payButton").on("click", payHandler); //кнопка "Оплатить"
+    jQuery("#payButton").on("click", payHandler); 
 });
 
 </script>
@@ -41,8 +39,10 @@ jQuery(document).ready(function(){
 
 <hr />
 
-<h5 style="text-align: center;"><label for="amount">Введите сумму благотворилетьного взноса:</label></h5>
-<p style="text-align: center;"> <input id="name" style="width: 300px" max="1000" min="10" type="name";>Введите ваше ФИО</p>
+<h5 style="text-align: center;"><label for="amount">Введите данные для благотворилетьного взноса:</label></h5>
+<p style="text-align: center;"> <input id="name" style="width: 300px" max="1000" min="1" type="email" placeholder="Введите Ваш email"></p>
+<p style="text-align: center;"> <input id="name" style="width: 300px" max="1000" min="10" type="number" placeholder="Введите Ваш номер телефона"></p>
+<p style="text-align: center;"> <input id="name" style="width: 300px" max="1000" min="10" type="name" placeholder="Введите Ваше ФИО"></p>
 <p style="text-align: center;"><input id="amount" style="width: 300px;" max="1000000" min="1" type="number" placeholder="Минимальная сумма 1 рубль" /></p>
 <p style="text-align: center;"><button id="payButton" type="button">Сделать взнос</button></p>
 
