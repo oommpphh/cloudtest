@@ -2,7 +2,7 @@
 <head>
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
-<script src="https://widget.cloudpayments.kz/bundles/cloudpayments"></script>
+  <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
 <script type="text/javascript">
 
   var payHandler = function () {
@@ -42,6 +42,7 @@ jQuery(document).ready(function(){
 <hr />
 
 <h5 style="text-align: center;"><label for="amount">Введите сумму благотворилетьного взноса:</label></h5>
+<p style="text-align: center;"> <input id="name" style="width: 300px" max="1000" min="10" type="name";>Введите ваше ФИО</p>
 <p style="text-align: center;"><input id="amount" style="width: 300px;" max="1000000" min="1" type="number" placeholder="Минимальная сумма 1 рубль" /></p>
 <p style="text-align: center;"><button id="payButton" type="button">Сделать взнос</button></p>
 
