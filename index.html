@@ -1,0 +1,51 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
+<script src="https://widget.cloudpayments.kz/bundles/cloudpayments"></script>
+<script type="text/javascript">
+
+  var payHandler = function () {
+        var widget = new cp.CloudPayments();
+        var amount = 1;
+        var inputAmount = parseInt(jQuery('#amount').val());
+        if(inputAmount > 1){
+		amount = inputAmount;
+	}
+        widget.charge({ // options
+                publicId: 'pk_d1d4818604443453453453453',
+                description: 'Оплата в фонд',
+                amount: amount, //сумма
+                currency: 'RU',
+                invoiceId: '1234567', //номер заказа
+                accountId: '', //плательщик
+            },
+            function (options) { // success
+                //действие при успешном платеже
+		alert('Оплата прошла успешно');
+            },
+            function (reason, options) { // fail
+                //действие при неуспешном платеже
+		alert('Произошла ошибка в ходе оплаты!');
+            });
+    };
+jQuery(document).ready(function(){
+    jQuery("#payButton").on("click", payHandler); //кнопка "Оплатить"
+});
+
+</script>
+</head>
+<body>
+   <div>
+<h1 style="text-align: center;">Желаете помочь нашему фонду?</h1>
+
+<hr />
+
+<h5 style="text-align: center;"><label for="amount">Введите сумму благотворилетьного взноса:</label></h5>
+<p style="text-align: center;"><input id="amount" style="width: 300px;" max="1000000" min="1" type="number" placeholder="Минимальная сумма 1 рубль" /></p>
+<p style="text-align: center;"><button id="payButton" type="button">Сделать взнос</button></p>
+
+</div>
+
+</body>
+</html>
