@@ -5,93 +5,68 @@
   <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
 <script type="text/javascript">
 
-  var pay = function () {
+var pay = function () {
         var widget = new cp.CloudPayments();
         var amount = 1;
         var inputAmount = parseInt(jQuery('#amount').val());
         if(inputAmount > 1){
-		amount = inputAmount;
-	}
+		amount = inputAmount}
+    var receipt = {
+      Items: [
+        {
+          label: 'Подписка на благотворительный фонд', 
+                    price: 1.00, 
+                    quantity: 1.00, 
+                    amount: 1.00, 
+                    vat: 20, 
+                    method: 0, 
+                    object: 0, 
+        }
+      ],
+      taxationSystem: 0, 
+            email: 'test@test.test', 
+            phone: '+79999999999', 
+            isBso: false, 
+            amounts:
+            {
+                electronic: 1.00, 
+                advancePayment: 0.00, 
+                credit: 0.00,
+                provision: 0.00 
+            }
+    };
+
+  var data = {};
+  data.CloudPayments = {
+    CustomerReceipt: receipt, 
+        recurrent: {
+         interval: 'Month',
+         period: 1, 
+         customerReceipt: receipt 
+         }
+  };
+
         widget.charge({ 
                 publicId: 'pk_9fa97e83bd907f3840acb97123b46',
-                description: 'Оплата в фонд',
+                description: 'Оплата подписки в фонд',
                 amount: amount, 
                 currency: 'RUB',
                 invoiceId: '', 
-                accountId: '', 
+                accountId: '',
+                data: data 
             },
             function (options) { 
 		alert('Оплата прошла успешно');
             },
             function (reason, options) { 
 		alert('Произошла ошибка в ходе оплаты!');
-            });
-    };
+      }); 
+};
+
+
 jQuery(document).ready(function(){
     jQuery("#payButton").on("click", pay); 
 });
-
-var payments = new cp.CloudPayments({
-                        yandexPaySupport: false,
-                        applePaySupport: false,
-                        googlePaySupport: false,
-                        masterPassSupport: false,
-                        tinkoffInstallmentSupport: false
-                    });
-
-payments.oncomplete = (result) => {
-    console.log('result', result);
-}
-
-var receipt = {
-            Items: [//товарные позиции
-                 {
-                    label: 'Товар 1', //наименование товара
-                    price: amount, //цена
-                    quantity: 1.00, //количество
-                    amount: amount, //сумма
-                    vat: 20, //ставка НДС
-                    method: 0, // тег-1214 признак способа расчета - признак способа расчета
-                    object: 0, // тег-1212 признак предмета расчета - признак предмета товара, работы, услуги, платежа, выплаты, иного предмета расчета
-                }
-            ],
-            taxationSystem: 0, //система налогообложения; необязательный, если у вас одна система налогообложения
-            email: 'user@example.com', //e-mail покупателя, если нужно отправить письмо с чеком
-            phone: '', //телефон покупателя в любом формате, если нужно отправить сообщение со ссылкой на чек
-            isBso: false, //чек является бланком строгой отчетности
-            amounts: {
-                electronic: 0.00, // Сумма оплаты электронными деньгами
-                advancePayment: 0.00, // Сумма из предоплаты (зачетом аванса) (2 знака после запятой)
-                credit: 0.00, // Сумма постоплатой(в кредит) (2 знака после запятой)
-                provision: 0.00 // Сумма оплаты встречным предоставлением (сертификаты, др. мат.ценности) (2 знака после запятой)
-            }
-};
-
-var data = { //содержимое элемента data
-    CloudPayments: {
-        CustomerReceipt: receipt, //чек для первого платежа
-        recurrent: {
-                    interval: 'Month',
-                    period: 1,
-                    customerReceipt: receipt //чек для регулярных платежей
-        }
-    }
-};
-
-payments.pay("charge", { // options
-    publicId: 'pk_9fa97e83bd907f3840acb97123b46',
-    accountId: 'user@example.com',
-    description: 'Оплата товаров в example.com',
-    amount: inputAmount,
-    currency: 'RUB',
-    invoiceId: 1234567,
-    data: data
-}).then((result) => {
-    // Объект типа WidgetResult
-    console.log('result', result);
-});
-          
-
 
 </script>
 </head>
@@ -113,7 +88,7 @@ payments.pay("charge", { // options
     Ежемесячная подписка
   </label></p>
 </form>
-<p style="text-align: center;"><button id="payButton" type="button">Сделать взнос</button></p>
+<p style="text-align: center;"><button id="payButton" type="button">Оформить</button></p>
 
 </div>
 
